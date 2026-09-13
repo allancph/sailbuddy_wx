@@ -5,6 +5,8 @@ forecast on harbour / anchorage nodes of the Sailbuddy site, powered by the free
 [Open-Meteo Weather](https://open-meteo.com/en/docs) and
 [Marine Weather API](https://open-meteo.com/en/docs/marine-weather-api).
 
+![Harbour weather widget](docs/screenshot-harbour.png)
+
 ## Features
 
 - Current conditions: temperature, wind (speed + compass direction), waves
