@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for OpenMeteo Weather module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function openmeteo_weather_theme($existing, $type, $theme, $path) {
+  return [
+    'openmeteo_weather_widget' => [
+      'variables' => [
+        'current' => NULL,
+        'forecast' => NULL,
+      ],
+      'template' => 'openmeteo-weather-widget',
+    ],
+  ];
+}
+
+/**
+ * Decodes a WMO weather code into description + icon key (Danish).
+ *
+ * @param int|null $code
+ *   WMO weather code.
+ *
+ * @return array
+ *   ['label' => string, 'icon' => string]
+ */
+function _openmeteo_weather_wmo(?int $code): array {
+  $map = [
+    0 => ['Klart vejr', 'sun'],
+    1 => ['Overvejende klart', 'sun'],
+    2 => ['Delvist skyet', 'partly'],
+    3 => ['Overskyet', 'cloud'],
+    45 => ['Tåge', 'fog'],
+    48 => ['Glattejende tåge', 'fog'],
+    51 => ['Let støvregn', 'drizzle'],
+    53 => ['Støvregn', 'drizzle'],
+    55 => ['Tæt støvregn', 'drizzle'],
+    56 => ['Let underafkølet støvregn', 'drizzle'],
+    57 => ['Tæt underafkølet støvregn', 'drizzle'],
+    61 => ['Let regn', 'rain'],
+    63 => ['Regn', 'rain'],
+    65 => ['Tæt regn', 'rain'],
+    66 => ['Let underafkølet regn', 'rain'],
+    67 => ['Tæt underafkølet regn', 'rain'],
+    71 => ['Let snefald', 'snow'],
+    73 => ['Snefald', 'snow'],
+    75 => ['Tæt snefald', 'snow'],
+    77 => ['Snebyger', 'snow'],
+    80 => ['Lette regnbyger', 'rain'],
+    81 => ['Regnbyger', 'rain'],
+    82 => ['Voldsomme regnbyger', 'rain'],
+    85 => ['Lette snebyger', 'snow'],
+    86 => ['Tætte snebyger', 'snow'],
+    95 => ['Tordenvejr', 'storm'],
+    96 => ['Tordenvejr med hagl', 'storm'],
+    99 => ['Tordenvejr med kraftig hagl', 'storm'],
+  ];
+  return $map[$code] ?? ['Vejrdata', 'cloud'];
+}
+
+/**
+ * Converts a compass bearing (degrees) into a Danish 8-point label.
+ *
+ * @param int|float|null $degrees
+ *   Compass degrees, direction the wind/waves come from.
+ *
+ * @return string|null
+ *   Danish compass point (e.g. "NØ"), or NULL.
+ */
+function _openmeteo_weather_compass($degrees): ?string {
+  if ($degrees === NULL || $degrees === '') {
+    return NULL;
+  }
+  $points = ['N', 'NNØ', 'NØ', 'ØNØ', 'Ø', 'ØSØ', 'SØ', 'SSØ', 'S', 'SSV', 'SV', 'VSV', 'V', 'VNV', 'NV', 'NNV'];
+  $idx = (int) round(((float) $degrees % 360) / 360 * 16) % 16;
+  return $points[$idx];
+}
+
+/**
+ * Danmark day names.
+ */
+function _openmeteo_weather_weekday(\DateTimeInterface $dt): string {
+  $days = [1 => 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
+  return $days[(int) $dt->format('N')];
+}
+
+/**
+ * Implements template_preprocess_openmeteo_weather_widget().
+ */
+function template_preprocess_openmeteo_weather_widget(array &$variables): void {
+  $current = $variables['current'] ?? NULL;
+  if ($current) {
+    [$label, $icon] = _openmeteo_weather_wmo(isset($current['weather_code']) ? (int) $current['weather_code'] : NULL);
+    $current['desc'] = $label;
+    $current['icon'] = $icon;
+    $current['wind_compass'] = _openmeteo_weather_compass($current['wind_direction'] ?? NULL);
+    $current['wave_compass'] = _openmeteo_weather_compass($current['wave_direction'] ?? NULL);
+    if (isset($current['wave_period']) && $current['wave_period'] === NULL && isset($current['wave_peak_period'])) {
+      $current['wave_period'] = $current['wave_peak_period'];
+    }
+    $variables['current'] = $current;
+  }
+
+  $today = new \DateTimeImmutable('today', new \DateTimeZone(date_default_timezone_get()));
+  foreach (($variables['forecast'] ?? []) as $i => $day) {
+    [$label, $icon] = _openmeteo_weather_wmo(isset($day['weather_code']) ? (int) $day['weather_code'] : NULL);
+    $dt = new \DateTimeImmutable($day['date'], new \DateTimeZone(date_default_timezone_get()));
+    $diff = $begin = $dt->diff($today);
+    if ($i === 0) {
+      $name = 'I dag';
+    }
+    elseif ($i === 1) {
+      $name = 'I morgen';
+    }
+    else {
+      $name = ucfirst(_openmeteo_weather_weekday($dt));
+    }
+    $day['desc'] = $label;
+    $day['icon'] = $icon;
+    $day['name'] = $name;
+    $day['date_display'] = $dt->format('d/m');
+    $day['wind_compass'] = _openmeteo_weather_compass($day['wind_dir'] ?? NULL);
+    $day['wave_compass'] = _openmeteo_weather_compass($day['wave_dir'] ?? NULL);
+    $variables['forecast'][$i] = $day;
+  }
+}

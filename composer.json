@@ -1,0 +1,16 @@
+{
+    "name": "allancph/sailbuddy-openmeteo",
+    "type": "drupal-custom-module",
+    "description": "Open-Meteo weather + marine forecast widget for harbour / anchorage nodes.",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Allan",
+            "homepage": "https://github.com/allancph"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "drupal/geofield": "^1"
+    }
+}

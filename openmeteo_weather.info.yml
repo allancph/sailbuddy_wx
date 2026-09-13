@@ -1,0 +1,9 @@
+name: OpenMeteo Weather
+type: module
+description: 'Viser vejr og marin forcast på havne- og ankerplads-sider via Open-Meteo (Weather + Marine API).'
+package: Sailbuddy
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:node
+  - drupal:geofield
+  - drupal:block

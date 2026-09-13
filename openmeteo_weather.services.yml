@@ -1,0 +1,4 @@
+services:
+  openmeteo_weather.client:
+    class: Drupal\openmeteo_weather\Service\OpenMeteoClient
+    arguments: ['@http_client', '@cache.default', '@logger.factory']
