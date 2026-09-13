@@ -1,0 +1,201 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openmeteo_weather\n"
+"POT-Creation-Date: 2026-09-13\n"
+"Last-Translator: Sailbuddy\n"
+"Language-Team: Sailbuddy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Clear sky"
+msgstr "Selkeä"
+
+msgid "Mostly clear"
+msgstr "Enimmäkseen selkeä"
+
+msgid "Partly cloudy"
+msgstr "Puolipilvinen"
+
+msgid "Overcast"
+msgstr "Pilvinen"
+
+msgid "Fog"
+msgstr "Sumu"
+
+msgid "Depositing rime fog"
+msgstr "Kuurantuva sumu"
+
+msgid "Light drizzle"
+msgstr "Heikkoa tihkua"
+
+msgid "Drizzle"
+msgstr "Tihkua"
+
+msgid "Dense drizzle"
+msgstr "Tiheää tihkua"
+
+msgid "Light freezing drizzle"
+msgstr "Heikkoa jäätävää tihkua"
+
+msgid "Dense freezing drizzle"
+msgstr "Tiheää jäätävää tihkua"
+
+msgid "Light rain"
+msgstr "Heikkoa sadetta"
+
+msgid "Rain"
+msgstr "Sadetta"
+
+msgid "Heavy rain"
+msgstr "Voimakasta sadetta"
+
+msgid "Light freezing rain"
+msgstr "Heikkoa jäätävää sadetta"
+
+msgid "Heavy freezing rain"
+msgstr "Voimakasta jäätävää sadetta"
+
+msgid "Light snowfall"
+msgstr "Heikkoa lumisadetta"
+
+msgid "Snowfall"
+msgstr "Lumisadetta"
+
+msgid "Heavy snowfall"
+msgstr "Voimakasta lumisadetta"
+
+msgid "Snow grains"
+msgstr "Lumirae"
+
+msgid "Light rain showers"
+msgstr "Heikkoja sadekuuroja"
+
+msgid "Rain showers"
+msgstr "Sadekuuroja"
+
+msgid "Violent rain showers"
+msgstr "Rajuja sadekuuroja"
+
+msgid "Light snow showers"
+msgstr "Heikkoja lumikuuroja"
+
+msgid "Heavy snow showers"
+msgstr "Voimakkaita lumikuuroja"
+
+msgid "Thunderstorm"
+msgstr "Ukkonen"
+
+msgid "Thunderstorm with hail"
+msgstr "Ukkonen raekuuroin"
+
+msgid "Thunderstorm with heavy hail"
+msgstr "Ukkonen voimakkain raekuuroin"
+
+msgid "Weather data"
+msgstr "Säädata"
+
+msgid "N"
+msgstr "N"
+
+msgid "NNE"
+msgstr "NNE"
+
+msgid "NE"
+msgstr "NE"
+
+msgid "ENE"
+msgstr "ENE"
+
+msgid "E"
+msgstr "E"
+
+msgid "ESE"
+msgstr "ESE"
+
+msgid "SE"
+msgstr "SE"
+
+msgid "SSE"
+msgstr "SSE"
+
+msgid "S"
+msgstr "S"
+
+msgid "SSW"
+msgstr "SSW"
+
+msgid "SW"
+msgstr "SW"
+
+msgid "WSW"
+msgstr "WSW"
+
+msgid "W"
+msgstr "W"
+
+msgid "WNW"
+msgstr "WNW"
+
+msgid "NW"
+msgstr "NW"
+
+msgid "NNW"
+msgstr "NNW"
+
+msgid "Monday"
+msgstr "maanantai"
+
+msgid "Tuesday"
+msgstr "tiistai"
+
+msgid "Wednesday"
+msgstr "keskiviikko"
+
+msgid "Thursday"
+msgstr "torstai"
+
+msgid "Friday"
+msgstr "perjantai"
+
+msgid "Saturday"
+msgstr "lauantai"
+
+msgid "Sunday"
+msgstr "sunnuntai"
+
+msgid "Today"
+msgstr "Tänään"
+
+msgid "Tomorrow"
+msgstr "Huomenna"
+
+msgid "Wind"
+msgstr "Tuuli"
+
+msgid "Waves"
+msgstr "Aallot"
+
+msgid "Sea temperature"
+msgstr "Meren lämpötila"
+
+msgid "Precipitation"
+msgstr "Sademäärä"
+
+msgid "Updated"
+msgstr "Päivitetty"
+
+msgid "Wind direction"
+msgstr "Tuulen suunta"
+
+msgid "Wave direction"
+msgstr "Aaltojen suunta"
+
+msgid "Wave"
+msgstr "Aalto"
+
+msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
+msgstr "Sää ja aallot Open-Meteosta (DWD/ECMWF · Merellinen)"
+

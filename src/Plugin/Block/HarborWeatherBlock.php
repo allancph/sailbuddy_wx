@@ -38,11 +38,14 @@ class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInte
   /**
    * {@inheritdoc}
    */
+  /**
+   * {@inheritdoc}
+   */
   public function build() {
     $node = $this->routeMatch->getParameter('node');
 
-    // Only render for node types that carry a geolocation field.
-    if (!$node instanceof EntityInterface) {
+    // Only render for the content types this widget was built for.
+    if (!$node instanceof EntityInterface || !in_array($node->bundle(), ['harbour', 'anchorage'], TRUE)) {
       return [];
     }
 
@@ -53,7 +56,15 @@ class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInte
 
     $data = $this->client->getForecast($coords[0], $coords[1]);
     if ($data === NULL) {
-      return [];
+      // Open-Meteo er ikke tilgængeligt (DNS/API-nedbrud). Caches siden
+      // kun kort, så den ikke gemmes uden widget i 3 timer.
+      return [
+        '#cache' => [
+          'contexts' => ['route', 'languages:language_interface'],
+          'tags' => ['node:' . $node->id()],
+          'max-age' => 300,
+        ],
+      ];
     }
 
     return [
@@ -62,7 +73,7 @@ class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInte
       '#forecast' => $data['forecast'],
       '#attached' => ['library' => ['openmeteo_weather/widget']],
       '#cache' => [
-        'contexts' => ['route'],
+        'contexts' => ['route', 'languages:language_interface'],
         'tags' => ['node:' . $node->id()],
         'max-age' => 10800,
       ],

@@ -49,7 +49,7 @@ class OpenMeteoClient {
       'daily' => 'temperature_2m_max,temperature_2m_min,weather_code,wind_speed_10m_max,wind_direction_10m_dominant',
       'timezone' => 'auto',
       'forecast_days' => 5,
-      'wind_speed_unit' => 'kmh',
+      'wind_speed_unit' => 'ms',
     ]);
 
     $marine = $this->fetch(self::MARINE_URL, [

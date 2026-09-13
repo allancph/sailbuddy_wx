@@ -34,14 +34,14 @@
 
     <div class="omw-grid">
       <div class="omw-cell">
-        <span class="omw-label">Vind</span>
-        <span class="omw-value">{{ current.wind_speed ? current.wind_speed|round : '–' }} km/t</span>
+        <span class="omw-label">{{ 'Wind'|t }}</span>
+        <span class="omw-value">{{ current.wind_speed ? current.wind_speed|round : '–' }} m/s</span>
         {% if current.wind_direction is not null %}
           <span class="omw-compass" style="--rot: {{ current.wind_direction }}deg"><i></i>{{ current.wind_compass }}</span>
         {% endif %}
       </div>
       <div class="omw-cell">
-        <span class="omw-label">Bølger</span>
+        <span class="omw-label">{{ 'Waves'|t }}</span>
         <span class="omw-value">{{ current.wave_height ? current.wave_height|round(1) : '–' }} m
           {%- if current.wave_period %} · {{ current.wave_period|round(0) }} s{% endif -%}
         </span>
@@ -50,16 +50,16 @@
         {% endif %}
       </div>
       <div class="omw-cell">
-        <span class="omw-label">Havtemperatur</span>
+        <span class="omw-label">{{ 'Sea temperature'|t }}</span>
         <span class="omw-value">{{ current.sea_temp is not null ? current.sea_temp|round(1) : '–' }}&deg; C</span>
       </div>
       <div class="omw-cell">
-        <span class="omw-label">Nedbør</span>
+        <span class="omw-label">{{ 'Precipitation'|t }}</span>
         <span class="omw-value">{{ current.precipitation ? current.precipitation|round(1) : '0' }} mm</span>
       </div>
     </div>
 
-    <div class="omw-updated">Opdateret {{ fetched|date('d.m.Y · H:i') }}</div>
+    <div class="omw-updated">{{ 'Updated'|t }} {{ fetched|date('d.m.Y · H:i') }}</div>
   </div>
 
   {% if forecast %}
@@ -72,14 +72,14 @@
           <span class="omw-day-max">{{ day.temp_max ? day.temp_max|round : '–' }}&deg;</span>
           <span class="omw-day-min">{{ day.temp_min ? day.temp_min|round : '–' }}&deg;</span>
         </div>
-        <div class="omw-day-detail"><span class="omw-k k-wind" title="Vind">{{ day.wind_max ? day.wind_max|round : '–' }}</span><span class="omw-k-unit">km/t</span>{% if day.wind_compass %}<span class="omw-mini-compass" title="Vindretning">{{ day.wind_compass }}</span>{% endif %}</div>
+        <div class="omw-day-detail"><span class="omw-k k-wind" title="{{ 'Wind'|t }}">{{ day.wind_max ? day.wind_max|round : '–' }}</span><span class="omw-k-unit">m/s</span>{% if day.wind_compass %}<span class="omw-mini-compass" title="{{ 'Wind direction'|t }}">{{ day.wind_compass }}</span>{% endif %}</div>
         {% if day.wave_max is not null %}
-          <div class="omw-day-detail omw-day-wave"><span title="Bølge {{ day.wave_max|round(1) }} m">« {{ day.wave_max|round(1) }} m{% if day.wave_period_max %} · {{ day.wave_period_max|round(0) }} s{% endif %} »</span>{% if day.wave_compass %}<span class="omw-mini-compass omw-mini-wave" title="Bølgeretning">{{ day.wave_compass }}</span>{% endif %}</div>
+          <div class="omw-day-detail omw-day-wave"><span title="{{ 'Wave'|t }} {{ day.wave_max|round(1) }} m">« {{ day.wave_max|round(1) }} m{% if day.wave_period_max %} · {{ day.wave_period_max|round(0) }} s{% endif %} »</span>{% if day.wave_compass %}<span class="omw-mini-compass omw-mini-wave" title="{{ 'Wave direction'|t }}">{{ day.wave_compass }}</span>{% endif %}</div>
         {% endif %}
       </div>
     {% endfor %}
   </div>
   {% endif %}
 
-  <div class="omw-foot">Vejr &amp; bølger fra <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (DWD/ECMWF · Marine)</div>
+  <div class="omw-foot">{{ 'Weather & waves from Open-Meteo (DWD/ECMWF · Marine)'|t }}</div>
 </div>

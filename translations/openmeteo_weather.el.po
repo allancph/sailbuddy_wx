@@ -1,0 +1,201 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openmeteo_weather\n"
+"POT-Creation-Date: 2026-09-13\n"
+"Last-Translator: Sailbuddy\n"
+"Language-Team: Sailbuddy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Clear sky"
+msgstr "Αίθριος"
+
+msgid "Mostly clear"
+msgstr "Κυρίως αίθριος"
+
+msgid "Partly cloudy"
+msgstr "Μερικώς συννεφιασμένος"
+
+msgid "Overcast"
+msgstr "Συννεφιασμένος"
+
+msgid "Fog"
+msgstr "Ομίχλη"
+
+msgid "Depositing rime fog"
+msgstr "Παγετώδης ομίχλη"
+
+msgid "Light drizzle"
+msgstr "Ελαφρύ ψιλόβροχο"
+
+msgid "Drizzle"
+msgstr "Ψιλόβροχο"
+
+msgid "Dense drizzle"
+msgstr "Πυκνό ψιλόβροχο"
+
+msgid "Light freezing drizzle"
+msgstr "Ελαφρύ παγωμένο ψιλόβροχο"
+
+msgid "Dense freezing drizzle"
+msgstr "Πυκνό παγωμένο ψιλόβροχο"
+
+msgid "Light rain"
+msgstr "Ελαφρή βροχή"
+
+msgid "Rain"
+msgstr "Βροχή"
+
+msgid "Heavy rain"
+msgstr "Ισχυρή βροχή"
+
+msgid "Light freezing rain"
+msgstr "Ελαφρή παγωμένη βροχή"
+
+msgid "Heavy freezing rain"
+msgstr "Ισχυρή παγωμένη βροχή"
+
+msgid "Light snowfall"
+msgstr "Ελαφρή χιονόπτωση"
+
+msgid "Snowfall"
+msgstr "Χιονόπτωση"
+
+msgid "Heavy snowfall"
+msgstr "Ισχυρή χιονόπτωση"
+
+msgid "Snow grains"
+msgstr "Χιονόκκος"
+
+msgid "Light rain showers"
+msgstr "Ελαφρές μπόρες"
+
+msgid "Rain showers"
+msgstr "Μπόρες"
+
+msgid "Violent rain showers"
+msgstr "Ισχυρές μπόρες"
+
+msgid "Light snow showers"
+msgstr "Ελαφρές χιονομπόρες"
+
+msgid "Heavy snow showers"
+msgstr "Ισχυρές χιονομπόρες"
+
+msgid "Thunderstorm"
+msgstr "Καταιγίδα"
+
+msgid "Thunderstorm with hail"
+msgstr "Καταιγίδα με χαλάζι"
+
+msgid "Thunderstorm with heavy hail"
+msgstr "Καταιγίδα με ισχυρό χαλάζι"
+
+msgid "Weather data"
+msgstr "Μετεωρολογικά δεδομένα"
+
+msgid "N"
+msgstr "Β"
+
+msgid "NNE"
+msgstr "ΒΒΑ"
+
+msgid "NE"
+msgstr "ΒΑ"
+
+msgid "ENE"
+msgstr "ΑΒΑ"
+
+msgid "E"
+msgstr "Α"
+
+msgid "ESE"
+msgstr "ΑΝΑ"
+
+msgid "SE"
+msgstr "ΝΑ"
+
+msgid "SSE"
+msgstr "ΒΝΑ"
+
+msgid "S"
+msgstr "Ν"
+
+msgid "SSW"
+msgstr "ΝΝΔ"
+
+msgid "SW"
+msgstr "ΝΔ"
+
+msgid "WSW"
+msgstr "ΔΝΔ"
+
+msgid "W"
+msgstr "Δ"
+
+msgid "WNW"
+msgstr "ΔΒΔ"
+
+msgid "NW"
+msgstr "ΒΔ"
+
+msgid "NNW"
+msgstr "ΒΒΔ"
+
+msgid "Monday"
+msgstr "Δευτέρα"
+
+msgid "Tuesday"
+msgstr "Τρίτη"
+
+msgid "Wednesday"
+msgstr "Τετάρτη"
+
+msgid "Thursday"
+msgstr "Πέμπτη"
+
+msgid "Friday"
+msgstr "Παρασκευή"
+
+msgid "Saturday"
+msgstr "Σάββατο"
+
+msgid "Sunday"
+msgstr "Κυριακή"
+
+msgid "Today"
+msgstr "Σήμερα"
+
+msgid "Tomorrow"
+msgstr "Αύριο"
+
+msgid "Wind"
+msgstr "Άνεμος"
+
+msgid "Waves"
+msgstr "Κύματα"
+
+msgid "Sea temperature"
+msgstr "Θερμοκρασία θάλασσας"
+
+msgid "Precipitation"
+msgstr "Βροχόπτωση"
+
+msgid "Updated"
+msgstr "Ενημερώθηκε"
+
+msgid "Wind direction"
+msgstr "Κατεύθυνση ανέμου"
+
+msgid "Wave direction"
+msgstr "Κατεύθυνση κυμάτων"
+
+msgid "Wave"
+msgstr "Κύμα"
+
+msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
+msgstr "Καιρός και κύματα από Open-Meteo (DWD/ECMWF · Θαλάσσιο)"
+
