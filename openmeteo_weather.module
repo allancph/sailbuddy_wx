@@ -122,7 +122,6 @@ function template_preprocess_openmeteo_weather_widget(array &$variables): void {
     $variables['current'] = $current;
   }
 
-  $today = new \DateTimeImmutable('today', new \DateTimeZone(date_default_timezone_get()));
   foreach (($variables['forecast'] ?? []) as $i => $day) {
     [$label, $icon] = _openmeteo_weather_wmo(isset($day['weather_code']) ? (int) $day['weather_code'] : NULL);
     $dt = new \DateTimeImmutable($day['date'], new \DateTimeZone(date_default_timezone_get()));

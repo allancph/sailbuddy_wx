@@ -199,3 +199,6 @@ msgstr "Golf"
 msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
 msgstr "Weer en golven van Open-Meteo (DWD/ECMWF · Maritiem)"
 
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

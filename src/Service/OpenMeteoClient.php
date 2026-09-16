@@ -4,6 +4,8 @@ namespace Drupal\openmeteo_weather\Service;
 
 use GuzzleHttp\ClientInterface;
 use Drupal\Core\Cache\CacheBackendInterface;
+use Drupal\Component\Datetime\Time;
+use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
@@ -17,11 +19,13 @@ class OpenMeteoClient {
 
   protected ClientInterface $httpClient;
   protected CacheBackendInterface $cache;
-  protected $logger;
+  protected Time $time;
+  protected LoggerChannelInterface $logger;
 
-  public function __construct(ClientInterface $http_client, CacheBackendInterface $cache, LoggerChannelFactoryInterface $logger_factory) {
+  public function __construct(ClientInterface $http_client, CacheBackendInterface $cache, Time $time, LoggerChannelFactoryInterface $logger_factory) {
     $this->httpClient = $http_client;
     $this->cache = $cache;
+    $this->time = $time;
     $this->logger = $logger_factory->get('openmeteo_weather');
   }
 
@@ -68,7 +72,7 @@ class OpenMeteoClient {
 
     $normalized = $this->normalize($weather, $marine);
 
-    $this->cache->set($cache_key, $normalized, time() + self::CACHE_TTL);
+    $this->cache->set($cache_key, $normalized, $this->time->getRequestTime() + self::CACHE_TTL);
 
     return $normalized;
   }

@@ -199,3 +199,6 @@ msgstr "Aalto"
 msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
 msgstr "Sää ja aallot Open-Meteosta (DWD/ECMWF · Merellinen)"
 
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

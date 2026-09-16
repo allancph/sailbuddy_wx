@@ -199,3 +199,6 @@ msgstr "Val"
 msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
 msgstr "Vrijeme i valovi od Open-Meteo (DWD/ECMWF · Morski)"
 
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

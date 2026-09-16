@@ -199,3 +199,6 @@ msgstr "Κύμα"
 msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
 msgstr "Καιρός και κύματα από Open-Meteo (DWD/ECMWF · Θαλάσσιο)"
 
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

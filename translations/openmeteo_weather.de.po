@@ -199,3 +199,6 @@ msgstr "Welle"
 msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
 msgstr "Wetter und Wellen von Open-Meteo (DWD/ECMWF · Marine)"
 
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

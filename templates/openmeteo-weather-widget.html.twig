@@ -1,5 +1,17 @@
 {#
-  OpenMeteo weather + marine widget for harbor/anchorage nodes.
+/**
+ * @file
+ * Default theme implementation for the weather widget.
+ *
+ * Available variables:
+ * - current: Current weather data (temperature, wind, waves, sea temp).
+ * - forecast: Array of daily forecasts (5 days).
+ * - fetched: Unix timestamp when the data was fetched.
+ *
+ * @see template_preprocess_openmeteo_weather_widget()
+ *
+ * @ingroup themeable
+ */
 #}
 {% macro icon(kind) %}
 {%- if kind == 'sun' -%}

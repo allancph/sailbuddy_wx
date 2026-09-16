@@ -199,3 +199,6 @@ msgstr "Ola"
 msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
 msgstr "Tiempo y olas de Open-Meteo (DWD/ECMWF · Marino)"
 
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

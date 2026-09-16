@@ -199,3 +199,6 @@ msgstr "Våg"
 msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
 msgstr "Väder och vågor från Open-Meteo (DWD/ECMWF · Marin)"
 
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""
