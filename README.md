@@ -70,53 +70,70 @@ drush openmeteo_weather:cmems-coordinates --nodes=harbour,anchorage > harbours.j
 ```
 
 Returns a JSON array of `{id, title, lat, lon}` for all published harbour /
-anchorage nodes (524 for Sailbuddy).
+anchorage nodes (524 for Sailbuddy, incl. the 4 Limfjorden points that have no
+usable ocean grid cell within scan range).
 
 ### 2. Fetch + build cache files
 
-`scripts/cmems_fetch.py` runs on any machine that has the
-`copernicusmarine` toolbox installed (a virtualenv is recommended):
+`scripts/cmems_fetch.py` runs on the Proxmox host (`/opt/cmems-toolbox`, a
+virtualenv with the `copernicusmarine` toolbox):
 
 ```sh
 python3 -m venv /opt/cmems-toolbox/.venv
 /opt/cmems-toolbox/.venv/bin/pip install copernicusmarine
 /opt/cmems-toolbox/.venv/bin/copernicusmarine login           # once
 
-/opt/cmems-toolbox/.venv/bin/python scripts/cmems_fetch.py \
-  --coordinates harbours.json \
-  --outdir /opt/cmems-toolbox/cmems \
-  --skip-fresh \
-  --login-service allancph@gmail.com
+HOME=/opt/cmems-toolbox /opt/cmems-toolbox/.venv/bin/python \
+  /opt/cmems-toolbox/scripts/cmems_fetch.py \
+  --coordinates /opt/cmems-toolbox/harbours.json \
+  --outdir /opt/cmems-toolbox/cmems --days 4 --skip-fresh \
+  --copernicusmarine /opt/cmems-toolbox/.venv/bin/copernicusmarine
 ```
+
+Notes:
+
+- `HOME=/opt/cmems-toolbox` is required so the toolbox finds the stored
+  credentials (`~/.copernicusmarine/.copernicusmarine-credentials`).
+- `--copernicusmarine PATH` points at the venv binary; `-v VAR` must be
+  repeated per variable (the toolbox CLI does not accept several variables in
+  one flag).
 
 Behaviour:
 
 - Waves (`cmems_mod_glo_wav_anfc_0.083deg_PT3H-i`) are mandatory. When the
-  nearest grid cell is land-masked (common for coastal harbours), the script
-  scans offshore in 0.083° steps up to 0.33° until usable sea data is found.
+  nearest grid cell is land-masked (common for coastal harbours and enclosed
+  fjords), the script scans offshore **symmetrically** — north/east/south/west
+  — in 0.083° steps up to 0.5° until usable sea data is found. West-facing
+  coasts (e.g. the Wadden Sea) need a westward scan, hence the symmetrical
+  search. Very narrow fjords (e.g. Limfjorden) may still have no usable grid
+  cell within range; those coordinates are skipped and the widget falls back
+  to "temporarily unavailable".
 - SST (`thetao`) and ocean currents (`uo`/`vo`, PT6H-i) are best-effort.
 - `--skip-fresh` skips coordinates whose cache file is younger than the
   freshness TTL, so the 6-hourly cron job only refetches what it must.
 - Files are written atomically; a `/tmp`+`os.replace` pattern avoids corrupt
-  partial JSON.
+  partial JSON. A payload is only written when at least one non-empty wave
+  reading was found; otherwise the coordinate is reported as failed.
 - Daily aggregation reduces the 3-hourly wave series into a
   `{date, wave_max, wave_period_max, wave_dir}` list matching the widget.
+- Cache files are named `{lat:.3f}_{lon:.3f}.json` (e.g. `56.715_11.510.json`).
 
-### 3. Cron
+### 3. Cron (systemd timer)
 
-Example crontab entry (host or dedicated box):
+On the Proxmox host a systemd timer runs the whole pipeline every 6 hours:
 
-```cron
-# Copernicus Marine cache refresh (every 6 hours)
-17 */6 * * * /opt/cmems-toolbox/.venv/bin/python /opt/cmems-toolbox/scripts/cmems_fetch.py \
-  --coordinates /opt/cmems-toolbox/harbours.json --outdir /opt/cmems-toolbox/cmems --skip-fresh \
-  >> /opt/cmems-toolbox/cmems.log 2>&1
+```sh
+# /etc/systemd/system/cmems-fetch.service (oneshot) runs /opt/cmems-toolbox/run_all.sh:
+#   fetch (--skip-fresh)  =>  scp cmems/*.json to the Drupal private dir on CT146  =>
+#   chown devsail:www-data
+# /etc/systemd/system/cmems-fetch.timer  ->  03/09/15/21:17 UTC, Persistent=true
+systemctl daemon-reload && systemctl enable --now cmems-fetch.timer
 ```
 
-Then sync the resulting files into the Drupal site's private directory
-(`web/private/cmems/` for a standard private filesystem) and ensure they are
-readable by the web server user. Keep `harbours.json` current by re-exporting
-it after content changes.
+The fetch and the sync always run in one unit; the timer `Persistent=true`
+catches up on stopped machine time. `run_all.sh` syncs whatever fresh files
+exist (partial progress included) — the module itself judges staleness from the
+`fetched` timestamp in each file.
 
 ## Provider chain behaviour
 
