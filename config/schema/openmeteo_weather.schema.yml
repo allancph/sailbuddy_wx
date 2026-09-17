@@ -1,0 +1,23 @@
+openmeteo_weather.settings:
+  type: config_object
+  label: 'OpenMeteo Weather settings'
+  mapping:
+    cache_ttl:
+      type: integer
+      label: 'Cache TTL in seconds for the compiled forecast'
+    provider:
+      type: mapping
+      label: 'Provider settings'
+      mapping:
+        copernicus_label:
+          type: string
+          label: 'Copernicus Marine display label'
+        cmems_path:
+          type: string
+          label: 'Directory holding periodic Copernicus Marine cache files'
+        cmems_ttl:
+          type: integer
+          label: 'Copernicus cache freshness TTL in seconds'
+        cmems_max_age:
+          type: integer
+          label: 'Maximum accepted age of Copernicus cache files in seconds'

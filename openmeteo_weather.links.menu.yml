@@ -1,0 +1,5 @@
+openmeteo_weather.settings:
+  title: 'OpenMeteo Weather'
+  description: 'Configure the harbour weather provider chain.'
+  route_name: openmeteo_weather.settings
+  parent: system.admin_config_services

@@ -14,6 +14,9 @@ function openmeteo_weather_theme($existing, $type, $theme, $path) {
       'variables' => [
         'current' => NULL,
         'forecast' => NULL,
+        'provider_label' => NULL,
+        'fetched' => NULL,
+        'stale' => FALSE,
       ],
       'template' => 'openmeteo-weather-widget',
     ],
@@ -103,8 +106,9 @@ function _openmeteo_weather_weekday(\DateTimeInterface $dt): string {
  */
 function template_preprocess_openmeteo_weather_widget(array &$variables): void {
   $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $t = function (string $string) use ($langcode): string {
-    return \Drupal::service('string_translation')->translate($string, [], ['langcode' => $langcode]);
+  $t = function (string $string, array $args = []) use ($langcode): string {
+    return \Drupal::translation()
+      ->translate($string, $args, ['langcode' => $langcode]);
   };
 
   $current = $variables['current'] ?? NULL;
@@ -144,5 +148,15 @@ function template_preprocess_openmeteo_weather_widget(array &$variables): void {
     $day['wave_compass'] = $compass ? $t($compass) : NULL;
     $variables['forecast'][$i] = $day;
   }
+
+  // Keep provider/source info available to the template footer.
+  $label = $variables['provider_label'] ?? NULL;
+  if ($label) {
+    $variables['source_text'] = $t('Weather & waves from @source', ['@source' => $label]);
+  }
+  else {
+    $variables['source_text'] = $t('Weather & waves from Open-Meteo (DWD/ECMWF · Marine)');
+  }
+  $variables['is_stale'] = !empty($variables['stale']);
 }
 

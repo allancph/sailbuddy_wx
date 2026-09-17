@@ -1,0 +1,6 @@
+cache_ttl: 10800
+provider:
+  copernicus_label: 'Copernicus Marine Service'
+  cmems_path: 'private://cmems'
+  cmems_ttl: 21600
+  cmems_max_age: 86400

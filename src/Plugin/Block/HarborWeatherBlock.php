@@ -5,7 +5,7 @@ namespace Drupal\openmeteo_weather\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\openmeteo_weather\Service\OpenMeteoClient;
+use Drupal\openmeteo_weather\Service\MarineWeatherManager;
 use Drupal\Core\Entity\EntityInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
-  protected OpenMeteoClient $client;
+  protected MarineWeatherManager $manager;
   protected RouteMatchInterface $routeMatch;
 
   /**
@@ -30,7 +30,7 @@ class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInte
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
     $instance = new static($configuration, $plugin_id, $plugin_definition);
-    $instance->client = $container->get('openmeteo_weather.client');
+    $instance->manager = $container->get('openmeteo_weather.manager');
     $instance->routeMatch = $container->get('current_route_match');
     return $instance;
   }
@@ -58,11 +58,12 @@ class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInte
       return $this->unavailable();
     }
 
-    $data = $this->client->getForecast($coords[0], $coords[1]);
+    $data = $this->manager->getForecast($coords[0], $coords[1]);
     if ($data === NULL) {
-      // Open-Meteo is unreachable (DNS/API outage/rate-limit). Return real
-      // markup with a short max-age so the page is NOT cached permanently
-      // without the widget, but re-evaluated after a few minutes.
+      // Every provider is unreachable (DNS/API outage/rate-limit) and no
+      // cached payload exists. Return real markup with a short max-age so the
+      // page is NOT cached permanently without the widget, but re-evaluated
+      // after a few minutes.
       return $this->unavailable();
     }
 
@@ -70,6 +71,9 @@ class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInte
       '#theme' => 'openmeteo_weather_widget',
       '#current' => $data['current'],
       '#forecast' => $data['forecast'],
+      '#provider_label' => $data['provider_label'] ?? NULL,
+      '#fetched' => $data['fetched'] ?? NULL,
+      '#stale' => !empty($data['stale']),
       '#attached' => ['library' => ['openmeteo_weather/widget']],
       '#cache' => [
         'contexts' => ['route', 'languages:language_interface'],
@@ -108,10 +112,13 @@ class HarborWeatherBlock extends BlockBase implements ContainerFactoryPluginInte
    * @param \Drupal\Core\Entity\EntityInterface $node
    *   The node.
    *
-   * @return array|null
+   * @return array{0: float, 1: float}|null
    *   [lat, lon] pair, or NULL if the node has no usable coordinate.
    */
   protected function getCoordinates(EntityInterface $node): ?array {
+    if (!$node instanceof \Drupal\node\NodeInterface) {
+      return NULL;
+    }
     foreach (['field_geolocation', 'field_geofield'] as $field_name) {
       if ($node->hasField($field_name) && !$node->get($field_name)->isEmpty()) {
         $value = $node->get($field_name)->first()->getValue();

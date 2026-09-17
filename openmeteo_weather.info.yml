@@ -1,6 +1,6 @@
 name: OpenMeteo Weather
 type: module
-description: 'Shows weather and marine forecast on harbour and anchorage pages via Open-Meteo (Weather + Marine API).'
+description: 'Shows weather and marine forecast on harbour and anchorage pages with an Open-Meteo primary provider and a Copernicus Marine fallback.'
 package: Sailbuddy
 core_version_requirement: ^10 || ^11
 dependencies:

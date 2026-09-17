@@ -93,5 +93,5 @@
   </div>
   {% endif %}
 
-  <div class="omw-foot">{{ 'Weather & waves from Open-Meteo (DWD/ECMWF · Marine)'|t }}</div>
+  <div class="omw-foot">{{ source_text|default('Weather & waves from Open-Meteo (DWD/ECMWF · Marine)'|t) }}{% if is_stale %} · <span class="omw-stale">{{ 'stale data'|t }}</span>{% endif %}</div>
 </div>

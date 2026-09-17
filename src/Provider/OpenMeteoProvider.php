@@ -1,51 +1,63 @@
 <?php
 
-namespace Drupal\openmeteo_weather\Service;
+declare(strict_types=1);
+
+namespace Drupal\openmeteo_weather\Provider;
 
 use GuzzleHttp\ClientInterface;
-use Drupal\Core\Cache\CacheBackendInterface;
-use Drupal\Component\Datetime\Time;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
- * Fetches and normalizes weather + marine forecast data from Open-Meteo.
+ * Live weather + marine forecast provider backed by the Open-Meteo REST API.
  */
-class OpenMeteoClient {
+class OpenMeteoProvider implements MarineWeatherProviderInterface {
 
   protected const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
   protected const MARINE_URL = 'https://marine-api.open-meteo.com/v1/marine';
-  protected const CACHE_TTL = 10800; // 3 hours.
 
   protected ClientInterface $httpClient;
-  protected CacheBackendInterface $cache;
-  protected Time $time;
   protected LoggerChannelInterface $logger;
+  protected bool $available = TRUE;
 
-  public function __construct(ClientInterface $http_client, CacheBackendInterface $cache, Time $time, LoggerChannelFactoryInterface $logger_factory) {
+  /**
+   * Constructs an OpenMeteoProvider.
+   *
+   * @param \GuzzleHttp\ClientInterface $http_client
+   *   The HTTP client.
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
+   *   The logger channel factory.
+   */
+  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory) {
     $this->httpClient = $http_client;
-    $this->cache = $cache;
-    $this->time = $time;
     $this->logger = $logger_factory->get('openmeteo_weather');
   }
 
   /**
-   * Returns normalized weather + marine data for a coordinate.
-   *
-   * @param float $lat
-   *   Latitude.
-   * @param float $lon
-   *   Longitude.
-   *
-   * @return array|null
-   *   Normalized data array, or NULL on failure.
+   * {@inheritdoc}
+   */
+  public function getId(): string {
+    return 'openmeteo';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getLabel(): string {
+    return 'Open-Meteo (DWD/ECMWF)';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isAvailable(): bool {
+    return $this->available;
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function getForecast(float $lat, float $lon): ?array {
-    $cache_key = 'openmeteo_weather:' . round($lat, 3) . ':' . round($lon, 3);
-    if ($cached = $this->cache->get($cache_key)) {
-      return $cached->data;
-    }
-
     $weather = $this->fetch(self::FORECAST_URL, [
       'latitude' => $lat,
       'longitude' => $lon,
@@ -66,15 +78,13 @@ class OpenMeteoClient {
     ]);
 
     if ($weather === NULL) {
-      // Base weather is required; marine alone is not useful enough.
+      $this->available = FALSE;
       return NULL;
     }
 
-    $normalized = $this->normalize($weather, $marine);
-
-    $this->cache->set($cache_key, $normalized, $this->time->getRequestTime() + self::CACHE_TTL);
-
-    return $normalized;
+    $data = $this->normalize($weather, $marine);
+    $data['fetched'] = time();
+    return $data;
   }
 
   /**
@@ -125,7 +135,7 @@ class OpenMeteoClient {
    *   Decoded response from the marine endpoint, or NULL if unavailable.
    *
    * @return array
-   *   Normalized structure with 'current', 'forecast', and 'fetched' keys.
+   *   Normalized structure with 'current' and 'forecast' keys.
    */
   protected function normalize(array $weather, ?array $marine): array {
     $current = $weather['current'] ?? [];
@@ -163,7 +173,6 @@ class OpenMeteoClient {
         'sea_temp' => $marine_current['sea_surface_temperature'] ?? NULL,
       ],
       'forecast' => $forecast,
-      'fetched' => time(),
     ];
   }
 

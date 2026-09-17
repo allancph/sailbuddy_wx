@@ -1,4 +1,17 @@
 services:
-  openmeteo_weather.client:
-    class: Drupal\openmeteo_weather\Service\OpenMeteoClient
-    arguments: ['@http_client', '@cache.default', '@datetime.time', '@logger.factory']
+  openmeteo_weather.provider.openmeteo:
+    class: Drupal\openmeteo_weather\Provider\OpenMeteoProvider
+    arguments: ['@http_client', '@logger.factory']
+
+  openmeteo_weather.provider.copernicus:
+    class: Drupal\openmeteo_weather\Provider\CopernicusMarineProvider
+    arguments: ['@config.factory', '@file_system', '@logger.factory']
+
+  openmeteo_weather.manager:
+    class: Drupal\openmeteo_weather\Service\MarineWeatherManager
+    arguments:
+      - '@cache.default'
+      - '@config.factory'
+      - '@datetime.time'
+      - '@logger.factory'
+      - ['@openmeteo_weather.provider.openmeteo', '@openmeteo_weather.provider.copernicus']
