@@ -21,3 +21,6 @@ openmeteo_weather.settings:
         cmems_max_age:
           type: integer
           label: 'Maximum accepted age of Copernicus cache files in seconds'
+        wind_grid_path:
+          type: string
+          label: "Directory holding the batched Open-Meteo wind vector grid file"

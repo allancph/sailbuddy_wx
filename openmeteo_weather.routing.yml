@@ -13,3 +13,10 @@ openmeteo_weather.info:
     _title: 'Weather provider status'
   requirements:
     _permission: 'administer site configuration'
+openmeteo_weather.wind_grid:
+  path: '/weather/wind-grid'
+  defaults:
+    _controller: '\Drupal\openmeteo_weather\Controller\WindGridController::grid'
+    _title: 'Wind vector grid'
+  requirements:
+    _access: 'TRUE'
