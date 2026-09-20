@@ -20,3 +20,11 @@ openmeteo_weather.wind_grid:
     _title: 'Wind vector grid'
   requirements:
     _access: 'TRUE'
+openmeteo_weather.wind_grid_eu:
+  path: '/weather/wind-grid-eu'
+  defaults:
+    _controller: '\Drupal\openmeteo_weather\Controller\WindGridController::gridEu'
+    _title: 'Wind vector grid (Europe)'
+  requirements:
+    _access: 'TRUE'
+
