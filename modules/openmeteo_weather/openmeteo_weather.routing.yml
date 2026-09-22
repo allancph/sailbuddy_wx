@@ -1,0 +1,30 @@
+openmeteo_weather.settings:
+  path: '/admin/config/services/openmeteo-weather'
+  defaults:
+    _form: '\Drupal\openmeteo_weather\Form\OpenmeteoWeatherSettingsForm'
+    _title: 'OpenMeteo Weather'
+  requirements:
+    _permission: 'administer site configuration'
+
+openmeteo_weather.info:
+  path: '/admin/config/services/openmeteo-weather/info'
+  defaults:
+    _controller: '\Drupal\openmeteo_weather\Controller\InfoController::status'
+    _title: 'Weather provider status'
+  requirements:
+    _permission: 'administer site configuration'
+openmeteo_weather.wind_grid:
+  path: '/weather/wind-grid'
+  defaults:
+    _controller: '\Drupal\openmeteo_weather\Controller\WindGridController::grid'
+    _title: 'Wind vector grid'
+  requirements:
+    _access: 'TRUE'
+openmeteo_weather.wind_grid_eu:
+  path: '/weather/wind-grid-eu'
+  defaults:
+    _controller: '\Drupal\openmeteo_weather\Controller\WindGridController::gridEu'
+    _title: 'Wind vector grid (Europe)'
+  requirements:
+    _access: 'TRUE'
+

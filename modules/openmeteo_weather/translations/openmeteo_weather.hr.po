@@ -1,0 +1,204 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openmeteo_weather\n"
+"POT-Creation-Date: 2026-09-13\n"
+"Last-Translator: Sailbuddy\n"
+"Language-Team: Sailbuddy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Clear sky"
+msgstr "Vedro"
+
+msgid "Mostly clear"
+msgstr "Pretežno vedro"
+
+msgid "Partly cloudy"
+msgstr "Djelomično oblačno"
+
+msgid "Overcast"
+msgstr "Oblačno"
+
+msgid "Fog"
+msgstr "Magla"
+
+msgid "Depositing rime fog"
+msgstr "Inje"
+
+msgid "Light drizzle"
+msgstr "Slaba rosulja"
+
+msgid "Drizzle"
+msgstr "Rosulja"
+
+msgid "Dense drizzle"
+msgstr "Gusta rosulja"
+
+msgid "Light freezing drizzle"
+msgstr "Slaba ledena rosulja"
+
+msgid "Dense freezing drizzle"
+msgstr "Gusta ledena rosulja"
+
+msgid "Light rain"
+msgstr "Slaba kiša"
+
+msgid "Rain"
+msgstr "Kiša"
+
+msgid "Heavy rain"
+msgstr "Jaka kiša"
+
+msgid "Light freezing rain"
+msgstr "Slaba ledena kiša"
+
+msgid "Heavy freezing rain"
+msgstr "Jaka ledena kiša"
+
+msgid "Light snowfall"
+msgstr "Slab snijeg"
+
+msgid "Snowfall"
+msgstr "Snijeg"
+
+msgid "Heavy snowfall"
+msgstr "Jak snijeg"
+
+msgid "Snow grains"
+msgstr "Snježna zrnca"
+
+msgid "Light rain showers"
+msgstr "Slabi pljuskovi kiše"
+
+msgid "Rain showers"
+msgstr "Pljuskovi kiše"
+
+msgid "Violent rain showers"
+msgstr "Siloviti pljuskovi kiše"
+
+msgid "Light snow showers"
+msgstr "Slabi pljuskovi snijega"
+
+msgid "Heavy snow showers"
+msgstr "Jaki pljuskovi snijega"
+
+msgid "Thunderstorm"
+msgstr "Grmljavinska oluja"
+
+msgid "Thunderstorm with hail"
+msgstr "Oluja s tučom"
+
+msgid "Thunderstorm with heavy hail"
+msgstr "Oluja s jakom tučom"
+
+msgid "Weather data"
+msgstr "Vremenski podaci"
+
+msgid "N"
+msgstr "S"
+
+msgid "NNE"
+msgstr "SSI"
+
+msgid "NE"
+msgstr "SI"
+
+msgid "ENE"
+msgstr "ISI"
+
+msgid "E"
+msgstr "I"
+
+msgid "ESE"
+msgstr "IJI"
+
+msgid "SE"
+msgstr "JI"
+
+msgid "SSE"
+msgstr "JJI"
+
+msgid "S"
+msgstr "J"
+
+msgid "SSW"
+msgstr "JJZ"
+
+msgid "SW"
+msgstr "JZ"
+
+msgid "WSW"
+msgstr "JZZ"
+
+msgid "W"
+msgstr "Z"
+
+msgid "WNW"
+msgstr "ZZJ"
+
+msgid "NW"
+msgstr "SJ"
+
+msgid "NNW"
+msgstr "SSJ"
+
+msgid "Monday"
+msgstr "ponedjeljak"
+
+msgid "Tuesday"
+msgstr "utorak"
+
+msgid "Wednesday"
+msgstr "srijeda"
+
+msgid "Thursday"
+msgstr "četvrtak"
+
+msgid "Friday"
+msgstr "petak"
+
+msgid "Saturday"
+msgstr "subota"
+
+msgid "Sunday"
+msgstr "nedjelja"
+
+msgid "Today"
+msgstr "Danas"
+
+msgid "Tomorrow"
+msgstr "Sutra"
+
+msgid "Wind"
+msgstr "Vjetar"
+
+msgid "Waves"
+msgstr "Valovi"
+
+msgid "Sea temperature"
+msgstr "Temperatura mora"
+
+msgid "Precipitation"
+msgstr "Oborine"
+
+msgid "Updated"
+msgstr "Ažurirano"
+
+msgid "Wind direction"
+msgstr "Smjer vjetra"
+
+msgid "Wave direction"
+msgstr "Smjer valova"
+
+msgid "Wave"
+msgstr "Val"
+
+msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
+msgstr "Vrijeme i valovi od Open-Meteo (DWD/ECMWF · Morski)"
+
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

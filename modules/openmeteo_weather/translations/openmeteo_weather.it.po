@@ -1,0 +1,204 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openmeteo_weather\n"
+"POT-Creation-Date: 2026-09-13\n"
+"Last-Translator: Sailbuddy\n"
+"Language-Team: Sailbuddy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Clear sky"
+msgstr "Cielo sereno"
+
+msgid "Mostly clear"
+msgstr "Prevalentemente sereno"
+
+msgid "Partly cloudy"
+msgstr "Parzialmente nuvoloso"
+
+msgid "Overcast"
+msgstr "Coperto"
+
+msgid "Fog"
+msgstr "Nebbia"
+
+msgid "Depositing rime fog"
+msgstr "Nebbia gelante"
+
+msgid "Light drizzle"
+msgstr "Pioviggine leggera"
+
+msgid "Drizzle"
+msgstr "Pioviggine"
+
+msgid "Dense drizzle"
+msgstr "Pioviggine fitta"
+
+msgid "Light freezing drizzle"
+msgstr "Pioviggine leggera ghiacciata"
+
+msgid "Dense freezing drizzle"
+msgstr "Pioviggine fitta ghiacciata"
+
+msgid "Light rain"
+msgstr "Pioggia leggera"
+
+msgid "Rain"
+msgstr "Pioggia"
+
+msgid "Heavy rain"
+msgstr "Pioggia forte"
+
+msgid "Light freezing rain"
+msgstr "Pioggia ghiacciata leggera"
+
+msgid "Heavy freezing rain"
+msgstr "Pioggia ghiacciata forte"
+
+msgid "Light snowfall"
+msgstr "Neve leggera"
+
+msgid "Snowfall"
+msgstr "Neve"
+
+msgid "Heavy snowfall"
+msgstr "Neve forte"
+
+msgid "Snow grains"
+msgstr "Granelli di neve"
+
+msgid "Light rain showers"
+msgstr "Rovesci di pioggia leggeri"
+
+msgid "Rain showers"
+msgstr "Rovesci di pioggia"
+
+msgid "Violent rain showers"
+msgstr "Rovesci di pioggia violenti"
+
+msgid "Light snow showers"
+msgstr "Rovesci di neve leggeri"
+
+msgid "Heavy snow showers"
+msgstr "Rovesci di neve forti"
+
+msgid "Thunderstorm"
+msgstr "Temporale"
+
+msgid "Thunderstorm with hail"
+msgstr "Temporale con grandine"
+
+msgid "Thunderstorm with heavy hail"
+msgstr "Temporale con grandine forte"
+
+msgid "Weather data"
+msgstr "Dati meteo"
+
+msgid "N"
+msgstr "N"
+
+msgid "NNE"
+msgstr "NNE"
+
+msgid "NE"
+msgstr "NE"
+
+msgid "ENE"
+msgstr "ENE"
+
+msgid "E"
+msgstr "E"
+
+msgid "ESE"
+msgstr "ESE"
+
+msgid "SE"
+msgstr "SE"
+
+msgid "SSE"
+msgstr "SSE"
+
+msgid "S"
+msgstr "S"
+
+msgid "SSW"
+msgstr "SSO"
+
+msgid "SW"
+msgstr "SO"
+
+msgid "WSW"
+msgstr "OSO"
+
+msgid "W"
+msgstr "O"
+
+msgid "WNW"
+msgstr "ONO"
+
+msgid "NW"
+msgstr "NO"
+
+msgid "NNW"
+msgstr "NNO"
+
+msgid "Monday"
+msgstr "lunedì"
+
+msgid "Tuesday"
+msgstr "martedì"
+
+msgid "Wednesday"
+msgstr "mercoledì"
+
+msgid "Thursday"
+msgstr "giovedì"
+
+msgid "Friday"
+msgstr "venerdì"
+
+msgid "Saturday"
+msgstr "sabato"
+
+msgid "Sunday"
+msgstr "domenica"
+
+msgid "Today"
+msgstr "Oggi"
+
+msgid "Tomorrow"
+msgstr "Domani"
+
+msgid "Wind"
+msgstr "Vento"
+
+msgid "Waves"
+msgstr "Onde"
+
+msgid "Sea temperature"
+msgstr "Temperatura del mare"
+
+msgid "Precipitation"
+msgstr "Precipitazione"
+
+msgid "Updated"
+msgstr "Aggiornato"
+
+msgid "Wind direction"
+msgstr "Direzione del vento"
+
+msgid "Wave direction"
+msgstr "Direzione delle onde"
+
+msgid "Wave"
+msgstr "Onda"
+
+msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
+msgstr "Meteo e onde da Open-Meteo (DWD/ECMWF · Marine)"
+
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr ""

@@ -1,0 +1,6 @@
+services:
+  openmeteo_weather.commands:
+    class: Drupal\openmeteo_weather\Commands\OpenmeteoWeatherCommands
+    arguments: ['@entity_type.manager']
+    tags:
+      - { name: drush.command }

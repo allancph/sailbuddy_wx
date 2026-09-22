@@ -1,0 +1,204 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openmeteo_weather\n"
+"POT-Creation-Date: 2026-09-13\n"
+"Last-Translator: Sailbuddy\n"
+"Language-Team: Sailbuddy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Clear sky"
+msgstr "Klart vejr"
+
+msgid "Mostly clear"
+msgstr "Overvejende klart"
+
+msgid "Partly cloudy"
+msgstr "Delvist skyet"
+
+msgid "Overcast"
+msgstr "Overskyet"
+
+msgid "Fog"
+msgstr "Tåge"
+
+msgid "Depositing rime fog"
+msgstr "Rimtåge"
+
+msgid "Light drizzle"
+msgstr "Let støvregn"
+
+msgid "Drizzle"
+msgstr "Støvregn"
+
+msgid "Dense drizzle"
+msgstr "Tæt støvregn"
+
+msgid "Light freezing drizzle"
+msgstr "Let underafkølet støvregn"
+
+msgid "Dense freezing drizzle"
+msgstr "Tæt underafkølet støvregn"
+
+msgid "Light rain"
+msgstr "Let regn"
+
+msgid "Rain"
+msgstr "Regn"
+
+msgid "Heavy rain"
+msgstr "Tæt regn"
+
+msgid "Light freezing rain"
+msgstr "Let underafkølet regn"
+
+msgid "Heavy freezing rain"
+msgstr "Tæt underafkølet regn"
+
+msgid "Light snowfall"
+msgstr "Let snefald"
+
+msgid "Snowfall"
+msgstr "Snefald"
+
+msgid "Heavy snowfall"
+msgstr "Tæt snefald"
+
+msgid "Snow grains"
+msgstr "Snegruskorn"
+
+msgid "Light rain showers"
+msgstr "Lette regnbyger"
+
+msgid "Rain showers"
+msgstr "Regnbyger"
+
+msgid "Violent rain showers"
+msgstr "Voldsomme regnbyger"
+
+msgid "Light snow showers"
+msgstr "Lette snebyger"
+
+msgid "Heavy snow showers"
+msgstr "Tætte snebyger"
+
+msgid "Thunderstorm"
+msgstr "Tordenvejr"
+
+msgid "Thunderstorm with hail"
+msgstr "Tordenvejr med hagl"
+
+msgid "Thunderstorm with heavy hail"
+msgstr "Tordenvejr med kraftig hagl"
+
+msgid "Weather data"
+msgstr "Vejrdata"
+
+msgid "N"
+msgstr "N"
+
+msgid "NNE"
+msgstr "NNØ"
+
+msgid "NE"
+msgstr "NØ"
+
+msgid "ENE"
+msgstr "ØNØ"
+
+msgid "E"
+msgstr "Ø"
+
+msgid "ESE"
+msgstr "ØSØ"
+
+msgid "SE"
+msgstr "SØ"
+
+msgid "SSE"
+msgstr "SSØ"
+
+msgid "S"
+msgstr "S"
+
+msgid "SSW"
+msgstr "SSV"
+
+msgid "SW"
+msgstr "SV"
+
+msgid "WSW"
+msgstr "VSV"
+
+msgid "W"
+msgstr "V"
+
+msgid "WNW"
+msgstr "VNV"
+
+msgid "NW"
+msgstr "NV"
+
+msgid "NNW"
+msgstr "NNV"
+
+msgid "Monday"
+msgstr "mandag"
+
+msgid "Tuesday"
+msgstr "tirsdag"
+
+msgid "Wednesday"
+msgstr "onsdag"
+
+msgid "Thursday"
+msgstr "torsdag"
+
+msgid "Friday"
+msgstr "fredag"
+
+msgid "Saturday"
+msgstr "lørdag"
+
+msgid "Sunday"
+msgstr "søndag"
+
+msgid "Today"
+msgstr "I dag"
+
+msgid "Tomorrow"
+msgstr "I morgen"
+
+msgid "Wind"
+msgstr "Vind"
+
+msgid "Waves"
+msgstr "Bølger"
+
+msgid "Sea temperature"
+msgstr "Havtemperatur"
+
+msgid "Precipitation"
+msgstr "Nedbør"
+
+msgid "Updated"
+msgstr "Opdateret"
+
+msgid "Wind direction"
+msgstr "Vindretning"
+
+msgid "Wave direction"
+msgstr "Bølgeretning"
+
+msgid "Wave"
+msgstr "Bølge"
+
+msgid "Weather & waves from Open-Meteo (DWD/ECMWF · Marine)"
+msgstr "Vejr og bølger fra Open-Meteo (DWD/ECMWF · Marine)"
+
+msgid "The weather service is temporarily unavailable. Please try again later."
+msgstr "Vejrtjenesten er midlertidigt utilgængelig. Prøv venligst igen senere."
+

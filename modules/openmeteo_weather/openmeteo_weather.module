@@ -1,0 +1,162 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for OpenMeteo Weather module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function openmeteo_weather_theme($existing, $type, $theme, $path) {
+  return [
+    'openmeteo_weather_widget' => [
+      'variables' => [
+        'current' => NULL,
+        'forecast' => NULL,
+        'provider_label' => NULL,
+        'fetched' => NULL,
+        'stale' => FALSE,
+      ],
+      'template' => 'openmeteo-weather-widget',
+    ],
+  ];
+}
+
+/**
+ * Decodes a WMO weather code into English description + icon key.
+ *
+ * Descriptions are meant to be passed through t() by the caller so the
+ * widget follows the active interface language.
+ *
+ * @param int|null $code
+ *   WMO weather code.
+ *
+ * @return array
+ *   ['label' => string, 'icon' => string]
+ */
+function _openmeteo_weather_wmo(?int $code): array {
+  $map = [
+    0 => ['Clear sky', 'sun'],
+    1 => ['Mostly clear', 'sun'],
+    2 => ['Partly cloudy', 'partly'],
+    3 => ['Overcast', 'cloud'],
+    45 => ['Fog', 'fog'],
+    48 => ['Depositing rime fog', 'fog'],
+    51 => ['Light drizzle', 'drizzle'],
+    53 => ['Drizzle', 'drizzle'],
+    55 => ['Dense drizzle', 'drizzle'],
+    56 => ['Light freezing drizzle', 'drizzle'],
+    57 => ['Dense freezing drizzle', 'drizzle'],
+    61 => ['Light rain', 'rain'],
+    63 => ['Rain', 'rain'],
+    65 => ['Heavy rain', 'rain'],
+    66 => ['Light freezing rain', 'rain'],
+    67 => ['Heavy freezing rain', 'rain'],
+    71 => ['Light snowfall', 'snow'],
+    73 => ['Snowfall', 'snow'],
+    75 => ['Heavy snowfall', 'snow'],
+    77 => ['Snow grains', 'snow'],
+    80 => ['Light rain showers', 'rain'],
+    81 => ['Rain showers', 'rain'],
+    82 => ['Violent rain showers', 'rain'],
+    85 => ['Light snow showers', 'snow'],
+    86 => ['Heavy snow showers', 'snow'],
+    95 => ['Thunderstorm', 'storm'],
+    96 => ['Thunderstorm with hail', 'storm'],
+    99 => ['Thunderstorm with heavy hail', 'storm'],
+  ];
+  return $map[$code] ?? ['Weather data', 'cloud'];
+}
+
+/**
+ * Converts a compass bearing (degrees) into a 16-point English label.
+ *
+ * @param int|float|null $degrees
+ *   Compass degrees, direction the wind/waves come from.
+ *
+ * @return string|null
+ *   English compass point (e.g. "NE"), or NULL.
+ */
+function _openmeteo_weather_compass($degrees): ?string {
+  if ($degrees === NULL || $degrees === '') {
+    return NULL;
+  }
+  $points = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  $idx = (int) round(((float) $degrees % 360) / 360 * 16) % 16;
+  return $points[$idx];
+}
+
+/**
+ * Resolves the weekday name for a date in the active interface language.
+ *
+ * @param \DateTimeInterface $dt
+ *   The date.
+ *
+ * @return string
+ *   Translated weekday name (e.g. "Monday" / "mandag").
+ */
+function _openmeteo_weather_weekday(\DateTimeInterface $dt): string {
+  $days = [1 => 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  return $days[(int) $dt->format('N')];
+}
+
+/**
+ * Implements template_preprocess_openmeteo_weather_widget().
+ */
+function template_preprocess_openmeteo_weather_widget(array &$variables): void {
+  $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $t = function (string $string, array $args = []) use ($langcode): string {
+    return \Drupal::translation()
+      ->translate($string, $args, ['langcode' => $langcode]);
+  };
+
+  $current = $variables['current'] ?? NULL;
+  if ($current) {
+    [$label, $icon] = _openmeteo_weather_wmo(isset($current['weather_code']) ? (int) $current['weather_code'] : NULL);
+    $current['desc'] = $t($label);
+    $current['icon'] = $icon;
+    $compass = _openmeteo_weather_compass($current['wind_direction'] ?? NULL);
+    $current['wind_compass'] = $compass ? $t($compass) : NULL;
+    $compass = _openmeteo_weather_compass($current['wave_direction'] ?? NULL);
+    $current['wave_compass'] = $compass ? $t($compass) : NULL;
+    if (isset($current['wave_period']) && $current['wave_period'] === NULL && isset($current['wave_peak_period'])) {
+      $current['wave_period'] = $current['wave_peak_period'];
+    }
+    $variables['current'] = $current;
+  }
+
+  foreach (($variables['forecast'] ?? []) as $i => $day) {
+    [$label, $icon] = _openmeteo_weather_wmo(isset($day['weather_code']) ? (int) $day['weather_code'] : NULL);
+    $dt = new \DateTimeImmutable($day['date'], new \DateTimeZone(date_default_timezone_get()));
+    if ($i === 0) {
+      $name = $t('Today');
+    }
+    elseif ($i === 1) {
+      $name = $t('Tomorrow');
+    }
+    else {
+      $name = $t(_openmeteo_weather_weekday($dt));
+    }
+    $day['desc'] = $t($label);
+    $day['icon'] = $icon;
+    $day['name'] = $name;
+    $day['date_display'] = $dt->format('d/m');
+    $compass = _openmeteo_weather_compass($day['wind_dir'] ?? NULL);
+    $day['wind_compass'] = $compass ? $t($compass) : NULL;
+    $compass = _openmeteo_weather_compass($day['wave_dir'] ?? NULL);
+    $day['wave_compass'] = $compass ? $t($compass) : NULL;
+    $variables['forecast'][$i] = $day;
+  }
+
+  // Keep provider/source info available to the template footer.
+  $label = $variables['provider_label'] ?? NULL;
+  if ($label) {
+    $variables['source_text'] = $t('Weather & waves from @source', ['@source' => $label]);
+  }
+  else {
+    $variables['source_text'] = $t('Weather & waves from Open-Meteo (DWD/ECMWF · Marine)');
+  }
+  $variables['is_stale'] = !empty($variables['stale']);
+}
+
