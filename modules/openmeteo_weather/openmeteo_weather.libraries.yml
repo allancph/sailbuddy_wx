@@ -2,3 +2,4 @@ widget:
   css:
     theme:
       css/weather-widget.css: {}
+      assets/weather-icons/css/weather-icons.min.css: {}

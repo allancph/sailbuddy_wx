@@ -173,3 +173,12 @@
 @media (max-width: 520px) {
   .omw-grid { grid-template-columns: 1fr 1fr; }
 }
+/* Erik Flowers weather-icons (font) — erstatning for inline SVG */
+.omw-icon-wi { font-size: 46px; line-height: 1; display: inline-block; }
+.omw-day-icon .omw-icon-wi { font-size: 32px; margin: 4px 0 2px; }
+.omw-wi-sun { color: #f2a900; }
+.omw-wi-partly { color: #b07d16; }
+.omw-wi-cloud, .omw-wi-fog { color: #7c93a3; }
+.omw-wi-drizzle, .omw-wi-rain { color: #3d7fbe; }
+.omw-wi-snow { color: #7fb0d6; }
+.omw-wi-storm { color: #6b5b95; }
